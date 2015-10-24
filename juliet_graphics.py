@@ -1,12 +1,10 @@
 import math;
 import os;
 import pygame;
+import sys;
 import time;
 from threading import Thread;
-
-import juliet_module;
-
-print(juliet_module.my_hi.x);
+import juliet_importer;
 
 BLACK = (0,0,0);
 WHITE = (255,255,255);
