@@ -18,5 +18,3 @@ class module:
 
 def new_module(_id = -1):
     return module(_id)
-
-test_module = new_module()
