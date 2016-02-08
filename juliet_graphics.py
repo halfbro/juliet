@@ -55,6 +55,7 @@ class juliet_graphics (Thread):
         self.current_modules.append(juliet_importer.modules['text_module'].new_module(3,"A method for displaying information on a mirror"))
         self.current_modules.append(juliet_importer.modules['text_module'].new_module(5,"TEST"))
         self.current_modules.append(juliet_importer.modules['fps_module'].new_module(7,clock))
+        self.current_modules.append(juliet_importer.modules['weather_module'].new_module(8))
 
         while not self.stop_running:
             for event in pygame.event.get():
