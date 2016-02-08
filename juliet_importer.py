@@ -15,7 +15,7 @@ def load_modules(path="./modules/"):
             if not name.endswith(".py"): continue
             print("Importing module {0}".format(name))
             try:
-                modules[name.split('.')[0]] = imp.load_source(name.split('.')[0], path + name)
+                modules[name.split('.')[0]] = imp.load_source(name.split('.')[0], root + '/' + name)
             except ImportError as e:
                 print("Error importing module {0} from directory {1}".format(name,os.getcwd()))
                 print(e)
