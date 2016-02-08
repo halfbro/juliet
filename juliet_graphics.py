@@ -47,14 +47,15 @@ class juliet_graphics (Thread):
         self.stop_running = True
 
     def run(self):
-        pygame.time.wait(4000)
+        pygame.time.wait(1000)
         clock = pygame.time.Clock()
+
         self.current_modules.append(juliet_importer.modules['text_module'].new_module(1,"Hello World!"))
         self.current_modules.append(juliet_importer.modules['text_module'].new_module(2,"This is juliet"))
         self.current_modules.append(juliet_importer.modules['text_module'].new_module(3,"A method for displaying information on a mirror"))
         self.current_modules.append(juliet_importer.modules['text_module'].new_module(5,"TEST"))
-        self.current_modules.append(juliet_importer.modules['text_module'].new_module(6,"TESTING THE VERY LARGE AND BREAKING CODE AND TIMING THINGS"))
-        #self.current_modules.append(juliet_importer.modules['fps_module'].new_module(7,clock)) #self.current_modules[1], self.current_modules[0] = self.current_modules[0], self.current_modules[1]
+        self.current_modules.append(juliet_importer.modules['fps_module'].new_module(7,clock))
+
         while not self.stop_running:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN and event.dict['key'] == pygame.K_q:
@@ -69,7 +70,8 @@ class juliet_graphics (Thread):
                     dirty_rects.append(module.mod_rect.copy())
                     module.changed = False
 
-            # Resolve any module collisions here
+            # Resolve any module collisions by shifting older modules down
+            '''
             mods = self.current_modules
             for a in range(len(mods)):
                 for b in range(a+1,len(mods)):
@@ -78,11 +80,17 @@ class juliet_graphics (Thread):
                         mods[b].mod_rect.move_ip(0, (mods[a].mod_rect.bottom - mods[b].mod_rect.top)**(1.7)/100+1)
                         mods[b].mod_rect.clamp_ip(self.screen.get_rect())
                         dirty_rects.append(mods[b].mod_rect.copy())
-
+            '''
+            # Alternatively don't move modules and let them overlap
+            for a in self.current_modules:
+                dirty_rects.append(a.mod_rect.copy())
+                a.mod_rect.clamp_ip(self.screen.get_rect())
+                dirty_rects.append(a.mod_rect.copy())
+            
             # Draw functions done here
             # This is one method - union all the dirty rectangles, then check if any module overlaps the dirty area.
             # This means that the module must be redrawn
-
+            '''
             if dirty_rects:
                 dirty_r = dirty_rects[0]
                 dirty_r.unionall_ip(dirty_rects)
@@ -93,20 +101,21 @@ class juliet_graphics (Thread):
                 #pygame.draw.rect(self.screen, (255,255,200), dirty_r, 1)
 
                 pygame.display.update(dirty_r)
-
+            '''
             # Alternate implementation: loop through all the modules and check if they collide with any of the dirty
             # rectangles in dirty_rects. If colliding, redraw. Works best on small number of modules
-            '''
+            
             for dirty in dirty_rects:
                 self.screen.fill(BLACK,dirty)
 
             for module in self.current_modules:
                 if module.mod_rect.collidelistall(dirty_rects):
+                    self.screen.fill(BLACK, module.mod_rect)
                     module.draw(self.screen.subsurface(module.mod_rect.clip(self.screen.get_rect())))
 
             for dirty in dirty_rects:
                 pygame.display.update(dirty)
-            '''
+            
 
             # Need some kind of method for instantiating new modules
             # Probably by calling some kind of method so its decoupled from the CLI module
