@@ -1,3 +1,4 @@
 *.pyc
 modules/c
 *.ttf
+*.key
