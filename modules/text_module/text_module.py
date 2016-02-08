@@ -3,9 +3,6 @@ from pygame import Rect, font, draw
 
 class text_module(juliet_module.module):
     mod_name = "text_module"
-    mod_id = -1
-    mod_rect = Rect(0,0,0,0)
-    changed = False
 
     module_font = None
     text = None

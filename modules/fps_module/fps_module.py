@@ -3,9 +3,6 @@ from pygame import Rect, font
 
 class fps_module(juliet_module.module):
     mod_name = "text_module"
-    mod_id = -1
-    mod_rect = Rect(0,0,0,0)
-    changed = False
 
     module_font = None
     clock = None

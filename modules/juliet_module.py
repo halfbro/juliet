@@ -3,7 +3,9 @@ from pygame import Rect
 class module:
     mod_name = "unnamed_module"
     mod_id = -1
-    mod_size = Rect(0,0,0,0)
+    mod_rect = Rect(0,0,0,0)
+
+    changed = False
 
     def __init__(self, _id = -1):
         print("Initializing generic module (This shouldn't happen...)")
