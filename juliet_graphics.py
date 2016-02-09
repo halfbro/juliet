@@ -50,12 +50,8 @@ class juliet_graphics (Thread):
         pygame.time.wait(1000)
         clock = pygame.time.Clock()
 
-        self.current_modules.append(juliet_importer.modules['text_module'].new_module(1,"Hello World!"))
-        self.current_modules.append(juliet_importer.modules['text_module'].new_module(2,"This is juliet"))
-        self.current_modules.append(juliet_importer.modules['text_module'].new_module(3,"A method for displaying information on a mirror"))
-        self.current_modules.append(juliet_importer.modules['text_module'].new_module(5,"TEST"))
-        self.current_modules.append(juliet_importer.modules['fps_module'].new_module(7,clock))
-        self.current_modules.append(juliet_importer.modules['weather_module'].new_module(8))
+        self.current_modules.append(juliet_importer.modules['fps_module'].new_module(1,clock))
+        self.current_modules.append(juliet_importer.modules['weather_module'].new_module(2))
 
         while not self.stop_running:
             for event in pygame.event.get():
@@ -105,7 +101,7 @@ class juliet_graphics (Thread):
             '''
             # Alternate implementation: loop through all the modules and check if they collide with any of the dirty
             # rectangles in dirty_rects. If colliding, redraw. Works best on small number of modules
-            
+            # '''
             for dirty in dirty_rects:
                 self.screen.fill(BLACK,dirty)
 
@@ -116,7 +112,7 @@ class juliet_graphics (Thread):
 
             for dirty in dirty_rects:
                 pygame.display.update(dirty)
-            
+            # '''
 
             # Need some kind of method for instantiating new modules
             # Probably by calling some kind of method so its decoupled from the CLI module
