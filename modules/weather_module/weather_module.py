@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import juliet_module
 from pygame import Rect, font, draw
 from time import time
@@ -32,7 +33,7 @@ class weather_module(juliet_module.module):
         self.lat = _lat
         self.lng = _lng
         self.weather_font = font.Font("weathericons.ttf",300)
-        self.mod_rect = Rect((50,0), self.weather_font.size("\uf00d "))
+        self.mod_rect = Rect((50,0), self.weather_font.size('\uf00d '))
 
         with open(_keyfile, 'r') as f:
             self.api = f.read()[:-1]
