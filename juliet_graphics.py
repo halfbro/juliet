@@ -1,12 +1,13 @@
-import os;
-import pygame;
-from threading import Thread;
-import juliet_importer;
+import os
+import pygame
+from threading import Thread
+import juliet_importer
+from juliet_input import Juliet_Input
 
-BLACK = (0,0,0);
-WHITE = (255,255,255);
+BLACK = (0,0,0)
+WHITE = (255,255,255)
 
-class juliet_graphics (Thread):
+class Juliet_Graphics (Thread):
     screen = None
     current_modules = []
     stop_running = False
@@ -56,7 +57,7 @@ class juliet_graphics (Thread):
         while not self.stop_running:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN and event.dict['key'] == pygame.K_q:
-                    self.stop();
+                    self.stop()
 
             dirty_rects = []
 
@@ -125,6 +126,18 @@ class juliet_graphics (Thread):
 
 
 # For testing porpoises only
-graphics = juliet_graphics();
-graphics.start();
-graphics.join();
+graphics = Juliet_Graphics()
+#userinput = Juliet_Input()
+graphics.daemon = True
+try:
+    #userinput.start()
+    graphics.start()
+    while True:
+        char = raw_input()
+        if char == 'q':
+            break
+#userinput.join()
+    #graphics.join()
+except (KeyboardInterrupt, SystemExit):
+    graphics.stop()
+    graphics.join()
