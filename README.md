@@ -15,7 +15,7 @@ This python program requires a number of external resources, like default fonts,
 In order to use this program, a number of programs and files need to be installed/moved to the main directory of this program (ie. juliet/Comme-Thin.ttf).
 These files are:
 
-`pygame` - The basis for using the low-level Linux framebuffer. Your distro should have a way of installing this already figured out, if it isn't already.
+`pygame` - The basis for using the low-level Linux framebuffer. Your distro should have a way of installing this already figured out, if it isn't already. Usually this involves searching your distro's package manager for the pygame package and installing it. Otherwise, pygame's website can be found here: http://www.pygame.org
 
 `Comme-Thin.ttf` - A clean, modern font that matches the feel of a simple interface.
 Found here: <http://www.fontsquirrel.com/fonts/comme>. Copy the `Comme-Thin.ttf` file to the main directory.
